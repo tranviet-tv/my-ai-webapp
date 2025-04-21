@@ -1,0 +1,348 @@
+:root {
+    --primary-color: #6366f1;
+    --bg-color: #f8fafc;
+    --sidebar-bg: #ffffff;
+    --text-color: #334155;
+    --border-color: #e2e8f0;
+    --user-message-bg: #e0e7ff; /* Màu nền tin nhắn người dùng */
+    --ai-message-bg: #ffffff; /* Màu nền tin nhắn AI */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    padding: 20px;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.new-chat-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 32px 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: var(--bg-color);
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.ai-message {
+    justify-content: flex-start;
+}
+
+.message .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.message-content {
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 80%;
+}
+
+.user-message .message-content {
+    background: var(--user-message-bg);
+}
+
+.ai-message .message-content {
+    background: var(--ai-message-bg);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.message-input {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.message-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.message-input button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+.user-profile .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.chat-history {
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chat-history h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.chat-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-history li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--text-color);
+}
+
+.chat-history li:hover {
+    background-color: var(--bg-color);
+}
+.top-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.container {
+    padding-top: 60px; /* tránh đè lên header */
+}
+.welcome-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 100px;
+}
+.welcome-text {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.top-right-buttons {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+.top-right-buttons button {
+    padding: 8px 14px;
+    border: none;
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.modal-content .btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-content .social {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}

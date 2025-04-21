@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AI Health Assistant</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="auth-buttons">
+            <button class="auth-btn login-btn">Login</button>
+            <button class="auth-btn register-btn">Register</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <button class="new-chat-btn">+ New Chat</button>
+            <div class="search-bar">
+                <input type="text" placeholder="Search conversations...">
+                <span class="search-icon">🔍</span>
+            </div>
+           
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=User" alt="User" class="avatar">
+                <span>User</span>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be inserted here -->
+                </div>
+
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="Type your message...">
+                    <button id="sendButton">Send</button>
+                </div>
+
+                <div class="welcome-text">
+                    Hello, Welcome to Healthcare Medical.
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!--  MODAL ĐĂNG NHẬP -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close login-close">&times;</span>
+            <h2>Login</h2>
+            <input type="email" placeholder="Địa chỉ Email*" required />
+            <button class="btn">Tiếp tục</button>
+            <p>Không có tài khoản? <a href="#" id="switchToRegister">Đăng ký</a></p>
+            <hr />
+            <button class="social">Tiếp tục với Google</button>
+            <button class="social">Tiếp tục với Tài khoản Microsoft</button>
+            <button class="social">Tiếp tục với Apple</button>
+            <button class="social">Tiếp tục với điện thoại</button>
+        </div>
+    </div>
+
+    <!--  MODAL ĐĂNG KÝ -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close register-close">&times;</span>
+            <h2>Đăng ký tài khoản</h2>
+            <input type="text" placeholder="Họ và tên*" required />
+            <input type="email" placeholder="Email*" required />
+            <input type="password" placeholder="Mật khẩu*" required />
+            <button class="btn">Đăng ký</button>
+            <p>Đã có tài khoản? <a href="#" id="switchToLogin">Đăng nhập</a></p>
+        </div>
+    </div>
+
+    <!--  SCRIPT -->
+    <script>
+        const loginBtn = document.querySelector(".login-btn");
+        const registerBtn = document.querySelector(".register-btn");
+
+        const loginModal = document.getElementById("loginModal");
+        const registerModal = document.getElementById("registerModal");
+
+        const closeLogin = document.querySelector(".login-close");
+        const closeRegister = document.querySelector(".register-close");
+
+        const switchToRegister = document.getElementById("switchToRegister");
+        const switchToLogin = document.getElementById("switchToLogin");
+
+        // Mở modal đăng nhập
+        loginBtn.addEventListener("click", () => {
+            loginModal.style.display = "block";
+        });
+
+        // Mở modal đăng ký
+        registerBtn.addEventListener("click", () => {
+            registerModal.style.display = "block";
+        });
+
+        // Đóng modal đăng nhập
+        closeLogin.addEventListener("click", () => {
+            loginModal.style.display = "none";
+        });
+
+        // Đóng modal đăng ký
+        closeRegister.addEventListener("click", () => {
+            registerModal.style.display = "none";
+        });
+
+        // Chuyển từ login sang register
+        switchToRegister.addEventListener("click", (e) => {
+            e.preventDefault();
+            loginModal.style.display = "none";
+            registerModal.style.display = "block";
+        });
+
+        // Chuyển từ register sang login
+        switchToLogin.addEventListener("click", (e) => {
+            e.preventDefault();
+            registerModal.style.display = "none";
+            loginModal.style.display = "block";
+        });
+
+        // Click ngoài modal để tắt
+        window.addEventListener("click", (event) => {
+            if (event.target === loginModal) {
+                loginModal.style.display = "none";
+            }
+            if (event.target === registerModal) {
+                registerModal.style.display = "none";
+            }
+        });
+        // Khi nhấn vào nút "+ New Chat" thì trang sẽ refresh
+        document.querySelector('.new-chat-btn').addEventListener('click', () => {
+            location.reload(); // Tải lại toàn bộ trang
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
