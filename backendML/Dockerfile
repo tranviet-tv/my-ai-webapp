@@ -11,6 +11,9 @@ COPY model.pkl .
 COPY Stroke_data.csv .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the rest of your code
+COPY . .
+
 # Expose port
 EXPOSE 8080
 
