@@ -1,149 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" xml:lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>AI Health Assistant</title>
+    <title>Healthcare Medical Chat</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <header class="top-header">
-        <div class="auth-buttons">
-            <button class="auth-btn login-btn">Login</button>
-            <button class="auth-btn register-btn">Register</button>
+    <div class="auth-modal" id="authModal">
+        <div class="auth-content">
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="loginTab">Login</button>
+                <button class="auth-tab" id="registerTab">Register</button>
+                <button class="auth-close" id="closeAuthModal">&times;</button>
+            </div>
+            
+            <div class="auth-body">
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <div class="social-login">
+                        <button type="button" class="social-btn google-btn">
+                            <i class="fab fa-google"></i> Continue with Google
+                        </button>
+                        <button type="button" class="social-btn facebook-btn">
+                            <i class="fab fa-facebook-f"></i> Continue with Facebook
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit-btn">Login</button>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="terms-agreement">
+                            <input type="checkbox" required> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit-btn">Register</button>
+                </form>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <div class="container">
+    <div class="container" id="mainApp" style="display: none;">
         <aside class="sidebar">
-            <button class="new-chat-btn">+ New Chat</button>
+            <button class="new-chat-btn" id="newChatBtn">+ New Chat</button>
             <div class="search-bar">
                 <input type="text" placeholder="Search conversations...">
                 <span class="search-icon">🔍</span>
             </div>
-           
+            <nav class="nav-links" id="chatHistory">
+                <div class="chat-history-title">Chat history</div>
+                <!-- Chat items will be added here by JavaScript -->
+            </nav>
             <div class="user-profile">
-                <img src="https://ui-avatars.com/api/?name=User" alt="User" class="avatar">
-                <span>User</span>
+                <img src="https://ui-avatars.com/api/?name=Guest" alt="User" class="avatar" id="userAvatar">
+                <span id="usernameDisplay">Guest</span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
             </div>
-
         </aside>
 
         <main class="main-content">
-            <div class="chat-container">
+            <div class="center-welcome">
+                <h1>Hello, Welcome to Healthcare Medical.</h1>
+                <p id="authPrompt">Please <a href="#" id="authLink">login</a> to start chatting.</p>
+            </div>
+            <div class="chat-container" style="display: none;">
                 <div class="chat-messages" id="chatMessages">
                     <!-- Messages will be inserted here -->
                 </div>
-
                 <div class="message-input">
                     <input type="text" id="messageInput" placeholder="Type your message...">
                     <button id="sendButton">Send</button>
                 </div>
-
-                <div class="welcome-text">
-                    Hello, Welcome to Healthcare Medical.
-                </div>
             </div>
         </main>
-
     </div>
-
-    <!--  MODAL ĐĂNG NHẬP -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close login-close">&times;</span>
-            <h2>Login</h2>
-            <input type="email" placeholder="Địa chỉ Email*" required />
-            <button class="btn">Tiếp tục</button>
-            <p>Không có tài khoản? <a href="#" id="switchToRegister">Đăng ký</a></p>
-            <hr />
-            <button class="social">Tiếp tục với Google</button>
-            <button class="social">Tiếp tục với Tài khoản Microsoft</button>
-            <button class="social">Tiếp tục với Apple</button>
-            <button class="social">Tiếp tục với điện thoại</button>
-        </div>
-    </div>
-
-    <!--  MODAL ĐĂNG KÝ -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close register-close">&times;</span>
-            <h2>Đăng ký tài khoản</h2>
-            <input type="text" placeholder="Họ và tên*" required />
-            <input type="email" placeholder="Email*" required />
-            <input type="password" placeholder="Mật khẩu*" required />
-            <button class="btn">Đăng ký</button>
-            <p>Đã có tài khoản? <a href="#" id="switchToLogin">Đăng nhập</a></p>
-        </div>
-    </div>
-
-    <!--  SCRIPT -->
-    <script>
-        const loginBtn = document.querySelector(".login-btn");
-        const registerBtn = document.querySelector(".register-btn");
-
-        const loginModal = document.getElementById("loginModal");
-        const registerModal = document.getElementById("registerModal");
-
-        const closeLogin = document.querySelector(".login-close");
-        const closeRegister = document.querySelector(".register-close");
-
-        const switchToRegister = document.getElementById("switchToRegister");
-        const switchToLogin = document.getElementById("switchToLogin");
-
-        // Mở modal đăng nhập
-        loginBtn.addEventListener("click", () => {
-            loginModal.style.display = "block";
-        });
-
-        // Mở modal đăng ký
-        registerBtn.addEventListener("click", () => {
-            registerModal.style.display = "block";
-        });
-
-        // Đóng modal đăng nhập
-        closeLogin.addEventListener("click", () => {
-            loginModal.style.display = "none";
-        });
-
-        // Đóng modal đăng ký
-        closeRegister.addEventListener("click", () => {
-            registerModal.style.display = "none";
-        });
-
-        // Chuyển từ login sang register
-        switchToRegister.addEventListener("click", (e) => {
-            e.preventDefault();
-            loginModal.style.display = "none";
-            registerModal.style.display = "block";
-        });
-
-        // Chuyển từ register sang login
-        switchToLogin.addEventListener("click", (e) => {
-            e.preventDefault();
-            registerModal.style.display = "none";
-            loginModal.style.display = "block";
-        });
-
-        // Click ngoài modal để tắt
-        window.addEventListener("click", (event) => {
-            if (event.target === loginModal) {
-                loginModal.style.display = "none";
-            }
-            if (event.target === registerModal) {
-                registerModal.style.display = "none";
-            }
-        });
-        // Khi nhấn vào nút "+ New Chat" thì trang sẽ refresh
-        document.querySelector('.new-chat-btn').addEventListener('click', () => {
-            location.reload(); // Tải lại toàn bộ trang
-        });
-    </script>
-
+    
     <script src="script.js"></script>
 </body>
-
 </html>
